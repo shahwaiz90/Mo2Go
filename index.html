@@ -810,6 +810,36 @@
         }
 
         /* WhatsApp Float */
+        @keyframes whatsapp-ring {
+            0% {
+                transform: rotate(0) scale(1);
+            }
+
+            5% {
+                transform: rotate(-15deg) scale(1.1);
+            }
+
+            10% {
+                transform: rotate(15deg) scale(1.1);
+            }
+
+            15% {
+                transform: rotate(-15deg) scale(1.1);
+            }
+
+            20% {
+                transform: rotate(15deg) scale(1.1);
+            }
+
+            25% {
+                transform: rotate(0) scale(1);
+            }
+
+            100% {
+                transform: rotate(0) scale(1);
+            }
+        }
+
         .whatsapp-float {
             position: fixed;
             width: 60px;
@@ -826,11 +856,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: whatsapp-ring 3s ease-in-out infinite;
         }
 
         .whatsapp-float:hover {
             transform: scale(1.1);
+            animation: none;
+            /* stop animation on hover */
+            background-color: #1ebe57;
+            /* slightly darker green */
         }
 
         .whats-app-icon {
