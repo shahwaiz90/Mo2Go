@@ -1109,13 +1109,12 @@
                 <input type="text" id="f-dropoff" class="form-control"
                     placeholder="e.g., B26 3QJ or Birmingham Airport">
             </div>
-
             <div class="form-group" style="margin-bottom: 24px; text-align: left;">
-                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700;">
-                    <input type="checkbox" id="f-elderly"
-                        style="width: 24px; height: 24px; accent-color: var(--primary);">
-                    Elderly Passenger / Shared Ride (Discounted Rate)
-                </label>
+                <label for="f-passenger-type">Passenger Type</label>
+                <select id="f-passenger-type" class="form-control" style="cursor: pointer;">
+                    <option value="standard">Standard Passenger (Under 57)</option>
+                    <option value="elderly">Elderly Passenger / Shared Ride (Age 57+)</option>
+                </select>
             </div>
 
             <button id="calc-fare-btn" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Calculate
@@ -1595,8 +1594,8 @@
                             const distanceMeters = routeData.routes[0].distance;
                             const distanceMiles = distanceMeters * 0.000621371;
 
-                            const isElderly = document.getElementById('f-elderly').checked;
-                            const ratePerMile = isElderly ? 1.00 : 1.50;
+                            const passengerType = document.getElementById('f-passenger-type').value;
+                            const ratePerMile = (passengerType === 'elderly') ? 1.00 : 1.50;
                             const fare = 5.00 + (distanceMiles * ratePerMile);
 
                             document.getElementById('fare-distance').innerText = distanceMiles.toFixed(1);
