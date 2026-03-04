@@ -1130,7 +1130,7 @@
                         <input type="time" id="b-time" class="form-control" required>
                     </div>
 
-                    <div class="form-group full-width">
+                    <div class="form-group">
                         <label for="b-req">Special Requirements</label>
                         <select id="b-req" class="form-control">
                             <option value="none">None</option>
@@ -1140,6 +1140,14 @@
                             <option value="airport">Airport drop-off</option>
                             <option value="hospital">Hospital appointment</option>
                             <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="b-payment">Payment Preference</label>
+                        <select id="b-payment" class="form-control">
+                            <option value="card">Card Payment</option>
+                            <option value="cash">Cash Payment</option>
                         </select>
                     </div>
 
@@ -1383,7 +1391,7 @@
                         // Format the message based on which form was submitted
                         let messageBody = "";
                         if (formId === 'booking-form') {
-                            messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nNotes: ${document.getElementById('b-notes').value}`;
+                            messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nPayment Preference: ${document.getElementById('b-payment').value}\nNotes: ${document.getElementById('b-notes').value}`;
                         } else if (formId === 'complaint-form') {
                             messageBody = `Name: ${document.getElementById('comp-name').value}\nPhone: ${document.getElementById('comp-phone').value}\nDate of Journey: ${document.getElementById('comp-date').value}\nIssue: ${document.getElementById('comp-desc').value}`;
                         }
