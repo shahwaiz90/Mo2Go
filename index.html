@@ -918,28 +918,7 @@
                         </div>
                     </div>
 
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="c-name">Name</label>
-                            <input type="text" id="c-name" class="form-control" required placeholder="Your Name">
-                        </div>
-                        <div class="form-group">
-                            <label for="c-phone">Phone Number</label>
-                            <input type="tel" id="c-phone" class="form-control" required placeholder="Your Number">
-                        </div>
-                        <div class="form-group">
-                            <label for="c-msg">Message</label>
-                            <textarea id="c-msg" class="form-control" required
-                                placeholder="How can we help?"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-                    </form>
 
-                    <div id="contact-success" class="form-success" style="padding: 24px;">
-                        <span
-                            style="font-size: 32px; color: var(--success); display:block; margin-bottom: 8px;">✓</span>
-                        <p style="font-weight: 700; color: var(--success);">Message sent! We'll be in touch.</p>
-                    </div>
                 </div>
 
                 <!-- Complaints Card -->
@@ -1108,8 +1087,6 @@
                         let messageBody = "";
                         if (formId === 'booking-form') {
                             messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nNotes: ${document.getElementById('b-notes').value}`;
-                        } else if (formId === 'contact-form') {
-                            messageBody = `Name: ${document.getElementById('c-name').value}\nPhone: ${document.getElementById('c-phone').value}\nMessage: ${document.getElementById('c-msg').value}`;
                         } else if (formId === 'complaint-form') {
                             messageBody = `Name: ${document.getElementById('comp-name').value}\nPhone: ${document.getElementById('comp-phone').value}\nDate of Journey: ${document.getElementById('comp-date').value}\nIssue: ${document.getElementById('comp-desc').value}`;
                         }
@@ -1147,7 +1124,6 @@
             };
 
             handleForm('booking-form', 'booking-success', 'New Taxi Booking Request');
-            handleForm('contact-form', 'contact-success', 'New Contact Form Message');
             handleForm('complaint-form', 'complaint-success', 'URGENT: New Complaint Registered');
 
             // Scroll Animation Observer
