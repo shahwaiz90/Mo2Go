@@ -934,7 +934,7 @@
 
         .whatsapp-float {
             position: fixed;
-            width: 60px;
+            width: auto;
             height: 60px;
             bottom: 40px;
             right: 40px;
@@ -942,41 +942,52 @@
             color: #FFF;
             border-radius: 50px;
             text-align: center;
-            font-size: 30px;
+            font-size: 20px;
+            font-weight: 700;
+            padding: 0 24px;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 12px;
             transition: transform 0.3s ease, background-color 0.3s ease;
             animation: whatsapp-ring 3s ease-in-out infinite;
         }
 
         .whatsapp-float:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             animation: none;
             /* stop animation on hover */
             background-color: #1ebe57;
             /* slightly darker green */
         }
 
+        .whatsapp-text {
+            display: inline-block;
+            font-family: 'Nunito', sans-serif;
+        }
+
         .whats-app-icon {
-            width: 35px;
-            height: 35px;
+            width: 32px;
+            height: 32px;
             fill: white;
         }
 
         @media (max-width: 768px) {
             .whatsapp-float {
-                width: 50px;
+                width: auto;
                 height: 50px;
                 bottom: 20px;
                 right: 20px;
+                padding: 0 16px;
+                font-size: 16px;
+                gap: 8px;
             }
 
             .whats-app-icon {
-                width: 30px;
-                height: 30px;
+                width: 24px;
+                height: 24px;
             }
         }
     </style>
@@ -1441,6 +1452,7 @@
             <path
                 d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.222.58 4.382 1.683 6.287L.18 24l5.88-1.543c1.848 1.01 3.93 1.543 6.071 1.543 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm0 21.996c-1.884 0-3.73-.506-5.35-1.467l-.383-.227-3.974 1.042 1.062-3.875-.249-.396A9.997 9.997 0 0 1 2.035 12.03c0-5.541 4.509-10.05 10.05-10.05 5.541 0 10.05 4.509 10.05 10.05 0 5.541-4.509 10.05-10.05 10.05zm5.513-7.536c-.302-.151-1.789-.883-2.066-.984-.277-.101-.478-.151-.678.151-.201.302-.78 1.033-.956 1.235-.176.202-.352.227-.654.076-1.554-.78-2.616-1.411-3.628-2.616-.277-.33-.03-.33.272-.63.15-.15.302-.353.453-.554.151-.202.202-.353.302-.555.101-.202.05-.353-.025-.504-.076-.151-.678-1.638-.93-2.242-.25-.605-.504-.522-.678-.522-.176 0-.378 0-.579 0-.202 0-.528.076-.804.378-.277.302-1.056 1.033-1.056 2.518s1.082 2.923 1.233 3.125c.151.202 2.112 3.224 5.118 4.524.715.31 1.272.495 1.708.634.717.227 1.37.194 1.885.118.577-.085 1.789-.731 2.041-1.436.252-.705.252-1.31.176-1.436-.076-.126-.277-.202-.579-.353z" />
         </svg>
+        <span class="whatsapp-text">Contact Us Now</span>
     </a>
     <!-- Web3Forms Captcha Script -->
     <script src="https://web3forms.com/client/script.js" async defer></script>
