@@ -1100,12 +1100,13 @@
 
         <div class="card" style="max-width: 600px; margin: 0 auto;">
             <div class="form-group" style="margin-bottom: 24px;">
-                <label for="f-pickup">Start Destination</label>
-                <input type="text" id="f-pickup" class="form-control" placeholder="e.g., Harbury, UK">
+                <label for="f-pickup">Start Destination (Postcode or Town)</label>
+                <input type="text" id="f-pickup" class="form-control" placeholder="e.g., CV47 2NZ or Harbury">
             </div>
             <div class="form-group" style="margin-bottom: 24px;">
-                <label for="f-dropoff">End Destination</label>
-                <input type="text" id="f-dropoff" class="form-control" placeholder="e.g., Birmingham Airport">
+                <label for="f-dropoff">End Destination (Postcode or Town)</label>
+                <input type="text" id="f-dropoff" class="form-control"
+                    placeholder="e.g., B26 3QJ or Birmingham Airport">
             </div>
 
             <button id="calc-fare-btn" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Calculate
@@ -1116,13 +1117,18 @@
                 <h3 style="color: var(--success); margin-bottom: 8px;">Estimated Fare: <span
                         id="fare-amount">£0.00</span></h3>
                 <p style="color: #2d3748; font-weight: 600;">Distance: <span id="fare-distance">0</span> miles</p>
+                <div
+                    style="margin-top: 20px; border-radius: 8px; overflow: hidden; height: 300px; border: 2px solid #e2e8f0;">
+                    <iframe id="fare-map-iframe" width="100%" height="100%" frameborder="0" scrolling="no"
+                        marginheight="0" marginwidth="0" src=""></iframe>
+                </div>
                 <p style="font-size: 14px; color: #718096; margin-top: 12px;">*This is a rough estimate based on the
                     quickest route. Extra wait times or precise dropoff coordinates may slightly affect final pricing.
                 </p>
             </div>
             <div id="fare-loading"
                 style="display: none; text-align: center; padding: 24px; color: var(--accent); font-weight: 800;">
-                Calculating distance... 🚕
+                Calculating distance & loading map... 🚕
             </div>
             <div id="fare-error"
                 style="display: none; background: #fff5f5; border: 2px solid var(--error); color: var(--error); padding: 16px; border-radius: 8px; text-align: center; margin-top: 16px;">
@@ -1583,6 +1589,11 @@
 
                             document.getElementById('fare-distance').innerText = distanceMiles.toFixed(1);
                             document.getElementById('fare-amount').innerText = `£${fare.toFixed(2)}`;
+
+                            const mapIframe = document.getElementById('fare-map-iframe');
+                            if (mapIframe) {
+                                mapIframe.src = `https://maps.google.com/maps?saddr=${encodeURIComponent(pickup)}&daddr=${encodeURIComponent(dropoff)}&output=embed`;
+                            }
 
                             loadingBox.style.display = 'none';
                             resultBox.style.display = 'block';
