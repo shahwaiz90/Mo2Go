@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mo 2 Go Private Hire Services LTD | Take you anywhere!</title>
-    <meta name="description" content="Trusted, caring local driver in Warwickshire. We pick up from Fenny Compton, Harbury, Southam and surrounding villages. Fixed prices, 7 days a week.">
+    <meta name="description"
+        content="Trusted, caring local driver in Warwickshire. We pick up from Fenny Compton, Harbury, Southam and surrounding villages. Fixed prices, 7 days a week.">
     <link rel="canonical" href="https://mo2go.co.uk">
-    
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap"
+        rel="stylesheet">
+
     <style>
         :root {
             --primary: #1a4d3a;
@@ -22,10 +26,28 @@
             --success: #38a169;
         }
 
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body, h1, h2, h3, h4, p, ul, li { margin: 0; padding: 0; }
-        
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        p,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Nunito', sans-serif;
             font-size: 18px;
@@ -35,21 +57,47 @@
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4 {
+        h1,
+        h2,
+        h3,
+        h4 {
             font-family: 'Playfair Display', serif;
             color: var(--primary);
             line-height: 1.2;
         }
 
-        h1 { font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 20px; }
-        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 24px; }
-        h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); margin-bottom: 16px; }
-        
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        img { max-width: 100%; display: block; }
-        
-        strong { font-weight: 700; }
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 24px;
+        }
+
+        h3 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            margin-bottom: 16px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        strong {
+            font-weight: 700;
+        }
 
         .btn {
             display: inline-flex;
@@ -67,23 +115,50 @@
             font-family: 'Nunito', sans-serif;
         }
 
-        .btn-primary { background-color: var(--accent); color: #000; }
-        .btn-primary:hover { background-color: #dcb030; transform: translateY(-2px); }
-        
-        .btn-secondary { background-color: transparent; color: var(--text-light); border: 2px solid var(--accent); }
-        .btn-secondary:hover { background-color: rgba(240, 192, 64, 0.1); transform: translateY(-2px); }
-        
-        .btn-danger { background-color: var(--error); color: var(--text-light); }
-        .btn-danger:hover { background-color: #c53030; transform: translateY(-2px); }
+        .btn-primary {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background-color: #dcb030;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-light);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(240, 192, 64, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background-color: var(--error);
+            color: var(--text-light);
+        }
+
+        .btn-danger:hover {
+            background-color: #c53030;
+            transform: translateY(-2px);
+        }
 
         @media (max-width: 768px) {
-            .btn { width: 100%; margin-bottom: 16px; }
+            .btn {
+                width: 100%;
+                margin-bottom: 16px;
+            }
         }
 
         /* Nav */
         header {
             position: fixed;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             background-color: var(--primary);
             color: var(--text-light);
             z-index: 1000;
@@ -91,7 +166,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
@@ -107,8 +182,14 @@
             gap: 32px;
         }
 
-        .nav-links a { font-weight: 600; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--accent); }
+        .nav-links a {
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
 
         .header-phone {
             background: var(--accent);
@@ -135,13 +216,20 @@
             padding: 4px;
         }
 
-        .mobile-phone-link { display: none; }
+        .mobile-phone-link {
+            display: none;
+        }
 
         @media (max-width: 992px) {
-            header { padding: 12px 20px; }
+            header {
+                padding: 12px 20px;
+            }
+
             .nav-links {
                 position: absolute;
-                top: 100%; left: 0; right: 0;
+                top: 100%;
+                left: 0;
+                right: 0;
                 background-color: var(--primary);
                 flex-direction: column;
                 padding: 24px;
@@ -150,18 +238,26 @@
                 opacity: 0;
                 visibility: hidden;
                 transition: all 0.3s ease;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             }
+
             .nav-links.active {
                 transform: translateY(0);
                 opacity: 1;
                 visibility: visible;
             }
-            .menu-toggle { display: block; }
-            .header-phone { display: none; }
-            .mobile-phone-link { 
-                display: inline-block; 
-                width: 100%; 
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .header-phone {
+                display: none;
+            }
+
+            .mobile-phone-link {
+                display: inline-block;
+                width: 100%;
                 text-align: center;
                 background: var(--accent);
                 color: #000;
@@ -201,7 +297,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding-top: 80px; /* offset header */
+            padding-top: 80px;
+            /* offset header */
         }
 
         #home {
@@ -212,8 +309,10 @@
             max-width: 1200px;
         }
 
-        #home h1 { color: var(--text-light); }
-        
+        #home h1 {
+            color: var(--text-light);
+        }
+
         .hero-sub {
             color: var(--accent);
             font-size: clamp(1.5rem, 3vw, 2.2rem);
@@ -227,11 +326,13 @@
             color: var(--accent);
             display: inline-block;
             margin-bottom: 48px;
-            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s;
         }
 
-        .hero-phone:hover { transform: scale(1.03); }
+        .hero-phone:hover {
+            transform: scale(1.03);
+        }
 
         .hero-buttons {
             display: flex;
@@ -257,23 +358,29 @@
             gap: 8px;
         }
 
-        .trust-icon { color: var(--accent); }
+        .trust-icon {
+            color: var(--accent);
+        }
 
         /* Forms General */
         .card {
             background: #fff;
             border-radius: 16px;
             padding: 48px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
             border: 1px solid #edf2f7;
         }
 
         @media (max-width: 768px) {
-            .card { padding: 32px 20px; }
+            .card {
+                padding: 32px 20px;
+            }
         }
 
-        .form-group { margin-bottom: 24px; }
-        
+        .form-group {
+            margin-bottom: 24px;
+        }
+
         .form-group label {
             display: block;
             font-weight: 700;
@@ -320,7 +427,9 @@
             transition: color 0.3s;
         }
 
-        .booking-phone:hover { color: var(--accent); }
+        .booking-phone:hover {
+            color: var(--accent);
+        }
 
         .form-grid {
             display: grid;
@@ -329,10 +438,14 @@
         }
 
         @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .full-width { grid-column: 1 / -1; }
+        .full-width {
+            grid-column: 1 / -1;
+        }
 
         .coverage-box {
             background-color: var(--primary);
@@ -346,7 +459,10 @@
             box-shadow: 0 10px 30px rgba(26, 77, 58, 0.2);
         }
 
-        .coverage-box span { color: var(--accent); font-weight: 700; }
+        .coverage-box span {
+            color: var(--accent);
+            font-weight: 700;
+        }
 
         .form-success {
             display: none;
@@ -358,8 +474,18 @@
             margin-top: 24px;
         }
 
-        .form-success h3 { color: var(--success); margin-bottom: 16px; font-family: 'Nunito', sans-serif; font-weight: 700; }
-        .form-success-icon { font-size: 64px; margin-bottom: 24px; color: var(--success); }
+        .form-success h3 {
+            color: var(--success);
+            margin-bottom: 16px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .form-success-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            color: var(--success);
+        }
 
         /* 3. Contact & Complaints */
         #contact-wrapper {
@@ -368,7 +494,10 @@
             border-bottom: 1px solid #edf2f7;
         }
 
-        #contact { padding-top: 80px; padding-bottom: 80px; }
+        #contact {
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
 
         .contact-grid {
             display: grid;
@@ -377,13 +506,19 @@
         }
 
         @media (max-width: 992px) {
-            .contact-grid { grid-template-columns: 1fr; }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .contact-card h2 { margin-bottom: 32px; }
+        .contact-card h2 {
+            margin-bottom: 32px;
+        }
 
-        .contact-details { margin-bottom: 40px; }
-        
+        .contact-details {
+            margin-bottom: 40px;
+        }
+
         .contact-item {
             display: flex;
             align-items: center;
@@ -392,7 +527,9 @@
             margin-bottom: 20px;
         }
 
-        .contact-icon { font-size: 28px; }
+        .contact-icon {
+            font-size: 28px;
+        }
 
         .contact-link {
             color: var(--primary);
@@ -400,7 +537,9 @@
             transition: color 0.3s;
         }
 
-        .contact-link:hover { color: var(--accent); }
+        .contact-link:hover {
+            color: var(--accent);
+        }
 
         .complaint-note {
             background-color: #fffaf0;
@@ -422,7 +561,10 @@
         }
 
         @media (max-width: 992px) {
-            .about-grid { grid-template-columns: 1fr; gap: 48px; }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
         }
 
         .about-visual {
@@ -438,8 +580,11 @@
         .about-visual::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at center, rgba(240,192,64,0.15) 0%, transparent 70%);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(240, 192, 64, 0.15) 0%, transparent 70%);
         }
 
         .visual-emoji {
@@ -462,7 +607,9 @@
         }
 
         @media (max-width: 500px) {
-            .value-grid { grid-template-columns: 1fr; }
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .value-card {
@@ -476,7 +623,7 @@
             gap: 16px;
             font-size: 20px;
             color: var(--primary);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
             transition: transform 0.3s, border-color 0.3s;
         }
 
@@ -493,20 +640,40 @@
         }
 
         @media (max-width: 768px) {
-            .testimonials { grid-template-columns: 1fr; margin-top: 64px; }
+            .testimonials {
+                grid-template-columns: 1fr;
+                margin-top: 64px;
+            }
         }
 
         .testimonial-card {
             background: #fff;
             padding: 40px;
             border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
             border: 1px solid #edf2f7;
         }
 
-        .stars { color: var(--accent); font-size: 28px; margin-bottom: 20px; letter-spacing: 2px; }
-        .quote { font-style: italic; font-size: 20px; margin-bottom: 24px; color: #4a5568; line-height: 1.8; }
-        .author { font-weight: 700; color: var(--primary); font-size: 18px; }
+        .stars {
+            color: var(--accent);
+            font-size: 28px;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 20px;
+            margin-bottom: 24px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .author {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
 
         /* Footer */
         footer {
@@ -525,11 +692,17 @@
         }
 
         @media (max-width: 992px) {
-            .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 48px; }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 48px;
+            }
         }
 
-        .footer-brand { margin-bottom: 24px; }
-        
+        .footer-brand {
+            margin-bottom: 24px;
+        }
+
         .footer-logo {
             font-family: 'Playfair Display', serif;
             font-size: 32px;
@@ -537,8 +710,12 @@
             margin-bottom: 16px;
         }
 
-        .footer-tagline { font-size: 20px; opacity: 0.9; margin-bottom: 32px; }
-        
+        .footer-tagline {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+
         .footer-big-contact {
             display: block;
             font-size: 28px;
@@ -548,32 +725,51 @@
             transition: color 0.3s;
         }
 
-        .footer-big-contact:hover { color: var(--accent); }
+        .footer-big-contact:hover {
+            color: var(--accent);
+        }
 
-        .footer-links h4, .footer-villages h4 {
+        .footer-links h4,
+        .footer-villages h4 {
             color: white;
             font-size: 22px;
             margin-bottom: 24px;
         }
 
-        .footer-links ul li { margin-bottom: 16px; }
-        .footer-links a { font-size: 18px; opacity: 0.8; transition: all 0.3s; }
-        .footer-links a:hover { opacity: 1; color: var(--accent); padding-left: 4px; }
+        .footer-links ul li {
+            margin-bottom: 16px;
+        }
 
-        .footer-villages p { font-size: 18px; opacity: 0.8; line-height: 1.9; }
+        .footer-links a {
+            font-size: 18px;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        .footer-villages p {
+            font-size: 18px;
+            opacity: 0.8;
+            line-height: 1.9;
+        }
 
         .footer-bottom {
             max-width: 1200px;
             margin: 0 auto;
             padding-top: 32px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             opacity: 0.6;
             font-size: 16px;
         }
-
     </style>
 </head>
+
 <body>
 
     <!-- Header / Navbar -->
@@ -596,7 +792,7 @@
             <h1>Mo 2 Go Private Hire Services LTD</h1>
             <p class="hero-sub">Take you anywhere!</p>
             <a href="tel:07365450917" class="hero-phone">07365 450917</a>
-            
+
             <div class="hero-buttons">
                 <a href="#book" class="btn btn-primary">Book Your Ride</a>
                 <a href="tel:07365450917" class="btn btn-secondary">Call Us Now</a>
@@ -616,7 +812,8 @@
     <section id="book" class="fade-in">
         <div class="booking-header">
             <h2>Book Your Taxi</h2>
-            <p style="font-size: 20px; color: #4a5568;">Fill in the form below and we'll call you back to confirm — or simply give us a ring!</p>
+            <p style="font-size: 20px; color: #4a5568;">Fill in the form below and we'll call you back to confirm — or
+                simply give us a ring!</p>
             <a href="tel:07365450917" class="booking-phone">07365 450917</a>
         </div>
 
@@ -631,14 +828,16 @@
                         <label for="b-phone">Phone Number</label>
                         <input type="tel" id="b-phone" class="form-control" required placeholder="07123 456789">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="b-pickup">Pick-Up Address</label>
-                        <input type="text" id="b-pickup" class="form-control" required placeholder="Street, Village/Town">
+                        <input type="text" id="b-pickup" class="form-control" required
+                            placeholder="Street, Village/Town">
                     </div>
                     <div class="form-group">
                         <label for="b-dest">Destination</label>
-                        <input type="text" id="b-dest" class="form-control" required placeholder="Where are you heading?">
+                        <input type="text" id="b-dest" class="form-control" required
+                            placeholder="Where are you heading?">
                     </div>
 
                     <div class="form-group">
@@ -665,7 +864,8 @@
 
                     <div class="form-group full-width">
                         <label for="b-notes">Additional Notes (Optional)</label>
-                        <textarea id="b-notes" class="form-control" placeholder="Any other details we should know?"></textarea>
+                        <textarea id="b-notes" class="form-control"
+                            placeholder="Any other details we should know?"></textarea>
                     </div>
 
                     <div class="form-group full-width" style="margin-bottom: 0;">
@@ -673,16 +873,20 @@
                     </div>
                 </div>
             </form>
-            
+
             <div id="booking-success" class="form-success">
                 <div class="form-success-icon">✓</div>
                 <h3>Request Sent Successfully!</h3>
-                <p style="font-size: 20px; color: #2d3748;">Thank you. We have received your details and will call you back shortly to confirm your booking.</p>
+                <p style="font-size: 20px; color: #2d3748;">Thank you. We have received your details and will call you
+                    back shortly to confirm your booking.</p>
             </div>
         </div>
 
         <div class="coverage-box fade-in">
-            We pick up from <span>Fenny Compton</span>, <span>North End</span>, <span>Knightcote</span>, <span>Bishop's Itchington</span>, <span>Harbury</span>, <span>Long Itchington</span>, <span>Southam</span>, <span>Napton on the Hill</span> and <span>Stockton</span> — and take you <span>anywhere you need to go!</span>
+            We pick up from <span>Fenny Compton</span>, <span>North End</span>, <span>Knightcote</span>, <span>Bishop's
+                Itchington</span>, <span>Harbury</span>, <span>Long Itchington</span>, <span>Southam</span>,
+            <span>Napton on the Hill</span> and <span>Stockton</span> — and take you <span>anywhere you need to
+                go!</span>
         </div>
     </section>
 
@@ -690,11 +894,11 @@
     <div id="contact-wrapper">
         <section id="contact" class="fade-in">
             <div class="contact-grid">
-                
+
                 <!-- Contact Us Card -->
                 <div class="card contact-card">
                     <h2>Contact Us</h2>
-                    
+
                     <div class="contact-details">
                         <div class="contact-item">
                             <span class="contact-icon">📞</span>
@@ -702,7 +906,7 @@
                         </div>
                         <div class="contact-item">
                             <span class="contact-icon">✉️</span>
-                            <a href="mailto:mujaddidrauf@gmail.com" class="contact-link">mujaddidrauf@gmail.com</a>
+                            <a href="mailto:bookrides@mo2go.co.uk" class="contact-link">bookrides@mo2go.co.uk</a>
                         </div>
                         <div class="contact-item">
                             <span class="contact-icon">⏰</span>
@@ -725,13 +929,15 @@
                         </div>
                         <div class="form-group">
                             <label for="c-msg">Message</label>
-                            <textarea id="c-msg" class="form-control" required placeholder="How can we help?"></textarea>
+                            <textarea id="c-msg" class="form-control" required
+                                placeholder="How can we help?"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
                     </form>
 
                     <div id="contact-success" class="form-success" style="padding: 24px;">
-                        <span style="font-size: 32px; color: var(--success); display:block; margin-bottom: 8px;">✓</span>
+                        <span
+                            style="font-size: 32px; color: var(--success); display:block; margin-bottom: 8px;">✓</span>
                         <p style="font-weight: 700; color: var(--success);">Message sent! We'll be in touch.</p>
                     </div>
                 </div>
@@ -758,14 +964,17 @@
                         </div>
                         <div class="form-group">
                             <label for="comp-desc">Description of Issue</label>
-                            <textarea id="comp-desc" class="form-control" required placeholder="Please provide details of what happened..."></textarea>
+                            <textarea id="comp-desc" class="form-control" required
+                                placeholder="Please provide details of what happened..."></textarea>
                         </div>
                         <button type="submit" class="btn btn-danger" style="width: 100%;">Submit Complaint</button>
                     </form>
 
                     <div id="complaint-success" class="form-success" style="padding: 24px;">
-                        <span style="font-size: 32px; color: var(--success); display:block; margin-bottom: 8px;">✓</span>
-                        <p style="font-weight: 700; color: var(--success);">Complaint registered. A member of management will contact you shortly.</p>
+                        <span
+                            style="font-size: 32px; color: var(--success); display:block; margin-bottom: 8px;">✓</span>
+                        <p style="font-weight: 700; color: var(--success);">Complaint registered. A member of management
+                            will contact you shortly.</p>
                     </div>
                 </div>
 
@@ -779,15 +988,20 @@
             <div class="about-visual">
                 <div class="visual-emoji">🚗</div>
             </div>
-            
+
             <div class="about-text">
                 <h2>About Us</h2>
-                <p>Mo 2 Go Private Hire Services LTD is a small, family-run business based in the heart of Warwickshire. We pride ourselves on offering a traditional, friendly taxi service that prioritises your comfort and safety above all else.</p>
-                
-                <p>We understand that not everyone just needs a quick lift — which is why we take extra care with elderly and less mobile passengers. From helping you to the door with your shopping, to ensuring you make it safely to hospital appointments, we look after you properly.</p>
-                
-                <p>As locals ourselves, we know the village lanes and the quickest routes. When you book with us, you get a reliable driver who genuinely cares about making your journey pleasant and stress-free.</p>
-                
+                <p>Mo 2 Go Private Hire Services LTD is a small, family-run business based in the heart of Warwickshire.
+                    We pride ourselves on offering a traditional, friendly taxi service that prioritises your comfort
+                    and safety above all else.</p>
+
+                <p>We understand that not everyone just needs a quick lift — which is why we take extra care with
+                    elderly and less mobile passengers. From helping you to the door with your shopping, to ensuring you
+                    make it safely to hospital appointments, we look after you properly.</p>
+
+                <p>As locals ourselves, we know the village lanes and the quickest routes. When you book with us, you
+                    get a reliable driver who genuinely cares about making your journey pleasant and stress-free.</p>
+
                 <div class="value-grid">
                     <div class="value-card">🛡️ Safety First</div>
                     <div class="value-card">⏱️ Punctual</div>
@@ -800,12 +1014,14 @@
         <div class="testimonials">
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p class="quote">"Absolutely wonderful service. Mo helped my mother to the car and waited patiently while she gathered her things. So reassuring to have a driver you can trust completely."</p>
+                <p class="quote">"Absolutely wonderful service. Mo helped my mother to the car and waited patiently
+                    while she gathered her things. So reassuring to have a driver you can trust completely."</p>
                 <p class="author">— Sarah Jenkins, Harbury</p>
             </div>
             <div class="testimonial-card">
                 <div class="stars">★★★★★</div>
-                <p class="quote">"Always on time, spotlessly clean car, and a truly lovely chap to chat with on the way to the station. Best private hire in the area by a mile. Fair prices too!"</p>
+                <p class="quote">"Always on time, spotlessly clean car, and a truly lovely chap to chat with on the way
+                    to the station. Best private hire in the area by a mile. Fair prices too!"</p>
                 <p class="author">— David T., Fenny Compton</p>
             </div>
         </div>
@@ -818,9 +1034,10 @@
                 <div class="footer-logo">Mo 2 Go</div>
                 <p class="footer-tagline">Take you anywhere!</p>
                 <a href="tel:07365450917" class="footer-big-contact">07365 450917</a>
-                <a href="mailto:mujaddidrauf@gmail.com" class="footer-big-contact" style="font-size: 20px;">mujaddidrauf@gmail.com</a>
+                <a href="mailto:bookrides@mo2go.co.uk" class="footer-big-contact"
+                    style="font-size: 20px;">bookrides@mo2go.co.uk</a>
             </div>
-            
+
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
@@ -834,10 +1051,11 @@
 
             <div class="footer-villages">
                 <h4>Service Area</h4>
-                <p>We proudly serve: Fenny Compton, North End, Knightcote, Bishop's Itchington, Harbury, Long Itchington, Southam, Napton on the Hill, Stockton & surrounding areas.</p>
+                <p>We proudly serve: Fenny Compton, North End, Knightcote, Bishop's Itchington, Harbury, Long
+                    Itchington, Southam, Napton on the Hill, Stockton & surrounding areas.</p>
             </div>
         </div>
-        
+
         <div class="footer-bottom">
             <p>&copy; 2025 Mo 2 Go Private Hire Services LTD. Licensed Private Hire Operator, Warwickshire, UK.</p>
         </div>
@@ -846,7 +1064,7 @@
     <!-- JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
+
             // Set min date for date picker to today
             const dateInput = document.getElementById('b-date');
             if (dateInput) {
@@ -876,7 +1094,7 @@
             const handleForm = (formId, successId) => {
                 const form = document.getElementById(formId);
                 const successMsg = document.getElementById(successId);
-                
+
                 if (form && successMsg) {
                     form.addEventListener('submit', (e) => {
                         e.preventDefault();
@@ -912,4 +1130,5 @@
         });
     </script>
 </body>
+
 </html>
