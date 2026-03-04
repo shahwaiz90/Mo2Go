@@ -1021,6 +1021,7 @@
         <nav class="nav-links" id="nav-links">
             <a href="#home">Home</a>
             <a href="#offers">Offers</a>
+            <a href="#fare-estimator">Fare Estimator</a>
             <a href="#book">Book Now</a>
             <a href="#contact-wrapper">Contact Us</a>
             <a href="#about">About Us</a>
@@ -1085,6 +1086,47 @@
                     <p style="font-size: 16px;">We offer specially discounted shared rides for the elderly. Making it
                         highly affordable, safe, and comfortable to manage errands or social visits.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1.5. Fare Estimator -->
+    <section id="fare-estimator" class="fade-in"
+        style="background-color: #f7fafc; padding: 60px 24px; border-top: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
+        <div class="booking-header">
+            <h2>Calculate Estimated Fare</h2>
+            <p style="font-size: 20px; color: #4a5568;">Plan your journey instantly. £2 flat rate per mile.</p>
+        </div>
+
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <div class="form-group" style="margin-bottom: 24px;">
+                <label for="f-pickup">Start Destination</label>
+                <input type="text" id="f-pickup" class="form-control" placeholder="e.g., Harbury, UK">
+            </div>
+            <div class="form-group" style="margin-bottom: 24px;">
+                <label for="f-dropoff">End Destination</label>
+                <input type="text" id="f-dropoff" class="form-control" placeholder="e.g., Birmingham Airport">
+            </div>
+
+            <button id="calc-fare-btn" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Calculate
+                Estimated Fare</button>
+
+            <div id="fare-result"
+                style="display: none; background: #f0fff4; border: 2px solid var(--success); padding: 24px; border-radius: 8px; text-align: center;">
+                <h3 style="color: var(--success); margin-bottom: 8px;">Estimated Fare: <span
+                        id="fare-amount">£0.00</span></h3>
+                <p style="color: #2d3748; font-weight: 600;">Distance: <span id="fare-distance">0</span> miles</p>
+                <p style="font-size: 14px; color: #718096; margin-top: 12px;">*This is a rough estimate based on the
+                    quickest route. Extra wait times or precise dropoff coordinates may slightly affect final pricing.
+                </p>
+            </div>
+            <div id="fare-loading"
+                style="display: none; text-align: center; padding: 24px; color: var(--accent); font-weight: 800;">
+                Calculating distance... 🚕
+            </div>
+            <div id="fare-error"
+                style="display: none; background: #fff5f5; border: 2px solid var(--error); color: var(--error); padding: 16px; border-radius: 8px; text-align: center; margin-top: 16px;">
+                Could not find the route between these locations. Please try adding more detail (e.g. city name, UK).
             </div>
         </div>
     </section>
@@ -1493,6 +1535,71 @@
                     if (typeof gtag === 'function') gtag('event', 'click_whatsapp', { 'event_category': 'Contact', 'event_label': 'WhatsApp Link' });
                 });
             });
+
+            // Fare Estimator Logic
+            const calcBtn = document.getElementById('calc-fare-btn');
+            const resultBox = document.getElementById('fare-result');
+            const errorBox = document.getElementById('fare-error');
+            const loadingBox = document.getElementById('fare-loading');
+
+            if (calcBtn) {
+                calcBtn.addEventListener('click', async () => {
+                    const pickup = document.getElementById('f-pickup').value.trim();
+                    const dropoff = document.getElementById('f-dropoff').value.trim();
+
+                    if (!pickup || !dropoff) {
+                        alert("Please enter both Start and End destinations.");
+                        return;
+                    }
+
+                    resultBox.style.display = 'none';
+                    errorBox.style.display = 'none';
+                    loadingBox.style.display = 'block';
+                    calcBtn.disabled = true;
+
+                    try {
+                        const getCoords = async (query) => {
+                            const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}&countrycodes=gb`);
+                            const data = await res.json();
+                            if (data && data.length > 0) return { lat: data[0].lat, lon: data[0].lon };
+                            return null;
+                        };
+
+                        const startCoords = await getCoords(pickup);
+                        const endCoords = await getCoords(dropoff);
+
+                        if (!startCoords || !endCoords) {
+                            throw new Error("Could not find locations");
+                        }
+
+                        const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${startCoords.lon},${startCoords.lat};${endCoords.lon},${endCoords.lat}?overview=false`;
+                        const routeRes = await fetch(osrmUrl);
+                        const routeData = await routeRes.json();
+
+                        if (routeData && routeData.routes && routeData.routes.length > 0) {
+                            const distanceMeters = routeData.routes[0].distance;
+                            const distanceMiles = distanceMeters * 0.000621371;
+                            const fare = distanceMiles * 2;
+
+                            document.getElementById('fare-distance').innerText = distanceMiles.toFixed(1);
+                            document.getElementById('fare-amount').innerText = `£${fare.toFixed(2)}`;
+
+                            loadingBox.style.display = 'none';
+                            resultBox.style.display = 'block';
+
+                            if (typeof gtag === 'function') gtag('event', 'fare_estimate', { 'event_category': 'Engagement', 'event_label': `${pickup} to ${dropoff}` });
+                        } else {
+                            throw new Error("Could not find route");
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        loadingBox.style.display = 'none';
+                        errorBox.style.display = 'block';
+                    } finally {
+                        calcBtn.disabled = false;
+                    }
+                });
+            }
         });
     </script>
 
