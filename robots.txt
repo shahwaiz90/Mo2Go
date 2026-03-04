@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mo2go.co.uk/sitemap.xml
