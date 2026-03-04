@@ -809,6 +809,10 @@
             font-size: 16px;
         }
 
+        .h-captcha {
+            margin-bottom: 24px;
+        }
+
         /* WhatsApp Float */
         @keyframes whatsapp-ring {
             0% {
@@ -997,6 +1001,10 @@
                             placeholder="Any other details we should know?"></textarea>
                     </div>
 
+                    <!-- Web3Forms Honeypot & Captcha -->
+                    <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                    <div class="form-group full-width h-captcha" data-captcha="true"></div>
+
                     <div class="form-group full-width" style="margin-bottom: 0;">
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Request My Taxi</button>
                     </div>
@@ -1080,7 +1088,12 @@
                             <textarea id="comp-desc" class="form-control" required
                                 placeholder="Please provide details of what happened..."></textarea>
                         </div>
-                        <button type="submit" class="btn btn-danger" style="width: 100%;">Submit Complaint</button>
+
+                        <!-- Web3Forms Honeypot & Captcha -->
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+                        <div class="h-captcha" data-captcha="true"></div>
+
+                        <button type="submit" class="btn btn-danger" style="width: 100%;">Submit</button>
                     </form>
 
                     <div id="complaint-success" class="form-success" style="padding: 24px;">
@@ -1207,6 +1220,14 @@
 
                         const submitBtn = form.querySelector('button[type="submit"]');
                         const originalText = submitBtn.innerText;
+
+                        // Check Captcha
+                        const hCaptcha = form.querySelector('[name="h-captcha-response"]');
+                        if (hCaptcha && !hCaptcha.value) {
+                            alert("Please complete the Captcha verification before submitting.");
+                            return;
+                        }
+
                         submitBtn.innerText = 'Sending...';
                         submitBtn.disabled = true;
 
@@ -1216,6 +1237,15 @@
                             messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nNotes: ${document.getElementById('b-notes').value}`;
                         } else if (formId === 'complaint-form') {
                             messageBody = `Name: ${document.getElementById('comp-name').value}\nPhone: ${document.getElementById('comp-phone').value}\nDate of Journey: ${document.getElementById('comp-date').value}\nIssue: ${document.getElementById('comp-desc').value}`;
+                        }
+
+                        // Check Honeypot
+                        const botcheck = form.querySelector('input[name="botcheck"]');
+                        if (botcheck && botcheck.checked) {
+                            alert("Spam detected.");
+                            submitBtn.innerText = originalText;
+                            submitBtn.disabled = false;
+                            return;
                         }
 
                         try {
@@ -1229,7 +1259,8 @@
                                     access_key: accessKey,
                                     subject: subjectTitle,
                                     from_name: "Mo2Go Website",
-                                    message: messageBody
+                                    message: messageBody,
+                                    "h-captcha-response": hCaptcha ? hCaptcha.value : ""
                                 })
                             });
 
@@ -1283,6 +1314,8 @@
                 d="M12.031 0C5.385 0 0 5.385 0 12.031c0 2.222.58 4.382 1.683 6.287L.18 24l5.88-1.543c1.848 1.01 3.93 1.543 6.071 1.543 6.646 0 12.031-5.385 12.031-12.031S18.677 0 12.031 0zm0 21.996c-1.884 0-3.73-.506-5.35-1.467l-.383-.227-3.974 1.042 1.062-3.875-.249-.396A9.997 9.997 0 0 1 2.035 12.03c0-5.541 4.509-10.05 10.05-10.05 5.541 0 10.05 4.509 10.05 10.05 0 5.541-4.509 10.05-10.05 10.05zm5.513-7.536c-.302-.151-1.789-.883-2.066-.984-.277-.101-.478-.151-.678.151-.201.302-.78 1.033-.956 1.235-.176.202-.352.227-.654.076-1.554-.78-2.616-1.411-3.628-2.616-.277-.33-.03-.33.272-.63.15-.15.302-.353.453-.554.151-.202.202-.353.302-.555.101-.202.05-.353-.025-.504-.076-.151-.678-1.638-.93-2.242-.25-.605-.504-.522-.678-.522-.176 0-.378 0-.579 0-.202 0-.528.076-.804.378-.277.302-1.056 1.033-1.056 2.518s1.082 2.923 1.233 3.125c.151.202 2.112 3.224 5.118 4.524.715.31 1.272.495 1.708.634.717.227 1.37.194 1.885.118.577-.085 1.789-.731 2.041-1.436.252-.705.252-1.31.176-1.436-.076-.126-.277-.202-.579-.353z" />
         </svg>
     </a>
+    <!-- Web3Forms Captcha Script -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 
 </html>
