@@ -1057,7 +1057,7 @@
 
                 <!-- Complaints Card -->
                 <div class="card contact-card">
-                    <h2>Register a Complaint</h2>
+                    <h2>Register a Complaint or Report a Lost Item</h2>
                     <div class="complaint-note">
                         We take every concern seriously and will respond to you within 24 hours to resolve the issue.
                     </div>
@@ -1149,7 +1149,7 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#book">Book a Taxi</a></li>
                     <li><a href="#contact-wrapper">Contact Info</a></li>
-                    <li><a href="#contact-wrapper">Register a Complaint</a></li>
+                    <li><a href="#contact-wrapper">Register a Complaint / Lost Item</a></li>
                     <li><a href="#about">About Us</a></li>
                 </ul>
             </div>
@@ -1197,7 +1197,7 @@
             });
 
             // Form Submissions via Web3Forms (No reload)
-            const handleForm = (formId, successId, subjectTitle) => {
+            const handleForm = (formId, successId, subjectTitle, accessKey) => {
                 const form = document.getElementById(formId);
                 const successMsg = document.getElementById(successId);
 
@@ -1226,7 +1226,7 @@
                                     'Accept': 'application/json'
                                 },
                                 body: JSON.stringify({
-                                    access_key: "58ca2d47-9f0a-4fc4-a0bb-afe2fc394a8c",
+                                    access_key: accessKey,
                                     subject: subjectTitle,
                                     from_name: "Mo2Go Website",
                                     message: messageBody
@@ -1250,8 +1250,8 @@
                 }
             };
 
-            handleForm('booking-form', 'booking-success', 'New Taxi Booking Request');
-            handleForm('complaint-form', 'complaint-success', 'URGENT: New Complaint Registered');
+            handleForm('booking-form', 'booking-success', 'New Taxi Booking Request', '17944a2a-adac-42ea-b3ce-5a1217935b10');
+            handleForm('complaint-form', 'complaint-success', 'URGENT: New Complaint or Lost Item Registered', '7e516864-c9a2-45df-a9fb-6733ded3f359');
 
             // Scroll Animation Observer
             const observerOptions = {
