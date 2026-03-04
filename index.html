@@ -65,8 +65,8 @@
 
     <style>
         :root {
-            --primary: #61c87a;
-            --accent: #60a5fa;
+            --primary: #1a4d3a;
+            --accent: #f0c040;
             --bg-light: #fcfbf9;
             --text-dark: #2d3748;
             --text-light: #ffffff;
@@ -167,11 +167,11 @@
 
         .btn-primary {
             background-color: var(--accent);
-            color: #ffffff;
+            color: #000;
         }
 
         .btn-primary:hover {
-            background-color: #3b82f6;
+            background-color: #dcb030;
             transform: translateY(-2px);
         }
 
@@ -209,27 +209,27 @@
             top: 0;
             left: 0;
             right: 0;
-            background-color: #ffffff;
-            color: var(--text-dark);
+            background-color: var(--primary);
+            color: var(--text-light);
             z-index: 1000;
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
             font-family: 'Nunito', sans-serif;
             font-size: 28px;
             font-weight: 700;
-            color: var(--text-dark);
+            color: var(--text-light);
             display: flex;
             align-items: center;
         }
 
         .logo-car {
-            fill: var(--primary);
+            fill: var(--accent);
             width: 34px;
             height: 34px;
             margin-right: 12px;
@@ -258,8 +258,6 @@
         }
 
         .nav-links a {
-            text-decoration: none;
-            color: var(--text-dark);
             font-weight: 600;
             transition: color 0.3s;
         }
@@ -270,7 +268,7 @@
 
         .header-phone {
             background: var(--accent);
-            color: #ffffff;
+            color: #000;
             padding: 8px 24px;
             border-radius: 50px;
             font-weight: 700;
@@ -279,7 +277,7 @@
         }
 
         .header-phone:hover {
-            background: #3b82f6;
+            background: #dcb030;
             transform: scale(1.05);
         }
 
@@ -287,7 +285,7 @@
             display: none;
             background: none;
             border: none;
-            color: var(--text-dark);
+            color: white;
             font-size: 32px;
             cursor: pointer;
             padding: 4px;
@@ -307,7 +305,7 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background-color: #ffffff;
+                background-color: var(--primary);
                 flex-direction: column;
                 padding: 24px;
                 gap: 24px;
@@ -337,11 +335,11 @@
                 width: 100%;
                 text-align: center;
                 background: var(--accent);
-                color: #ffffff;
+                color: #000;
                 padding: 12px;
-                border-radius: 50px;
+                border-radius: 8px;
                 font-weight: 700;
-                margin-top: 16px;
+                font-size: 20px;
             }
         }
 
@@ -557,20 +555,20 @@
         }
 
         .coverage-box {
-            background-color: var(--accent);
-            color: #ffffff;
+            background-color: var(--primary);
+            color: white;
             padding: 40px;
             border-radius: 16px;
             margin-top: 56px;
             text-align: center;
             font-size: 20px;
             line-height: 1.8;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+            box-shadow: 0 10px 30px rgba(26, 77, 58, 0.2);
         }
 
         .coverage-box span {
-            color: #ffffff;
-            font-weight: 800;
+            color: var(--accent);
+            font-weight: 700;
         }
 
         .form-success {
@@ -819,7 +817,7 @@
 
         /* Footer */
         footer {
-            background-color: #0f172a;
+            background-color: #0c2117;
             color: white;
             padding: 100px 24px 40px;
         }
@@ -1017,8 +1015,7 @@
                 <path
                     d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
             </svg>
-            <span style="color: var(--primary);"></span>Mo</span><span class="big-two">2</span><span
-                style="color: var(--accent);">Go</span>
+            Mo<span class="big-two">2</span>Go
         </div>
         <button class="menu-toggle" id="mobile-menu-btn" aria-label="Toggle menu">☰</button>
         <nav class="nav-links" id="nav-links">
@@ -1313,8 +1310,7 @@
                         <path
                             d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z" />
                     </svg>
-                    <span style="color: var(--primary);">Mo</span><span class="big-two">2</span><span
-                        style="color: var(--accent);">Go</span>
+                    Mo<span class="big-two">2</span>Go
                 </div>
                 <p class="footer-tagline">Take you anywhere!</p>
                 <a href="tel:07365450917" class="footer-big-contact">07365 450917</a>
