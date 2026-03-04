@@ -1153,7 +1153,9 @@
                 simply give us a ring!</p>
             <a href="tel:07365450917" class="booking-phone">07365 450917</a><br>
             <div class="discount-banner">
-                <span>🌟</span> We offer great discount rates for elderly passengers (Age 57+)
+                <span>🌟</span> We offer great discount rates for elderly passengers (Age 57+).<br>
+                <small style="font-size: 14px; opacity: 0.9; margin-left: 28px; display: block;">*To avail this
+                    discount, please politely show any valid proof of age document to the driver.</small>
             </div>
         </div>
 
@@ -1178,6 +1180,14 @@
                         <label for="b-dest">Destination</label>
                         <input type="text" id="b-dest" class="form-control" required
                             placeholder="Where are you heading?">
+                    </div>
+
+                    <div class="form-group" style="grid-column: 1 / -1;">
+                        <label for="b-passenger-type">Passenger Type</label>
+                        <select id="b-passenger-type" class="form-control" style="cursor: pointer;">
+                            <option value="Standard">Standard Passenger (Under 57)</option>
+                            <option value="Elderly">Elderly Passenger / Shared Ride (Age 57+)</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -1454,7 +1464,7 @@
                         // Format the message based on which form was submitted
                         let messageBody = "";
                         if (formId === 'booking-form') {
-                            messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nPayment Preference: ${document.getElementById('b-payment').value}\nNotes: ${document.getElementById('b-notes').value}`;
+                            messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPassenger Type: ${document.getElementById('b-passenger-type').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nPayment Preference: ${document.getElementById('b-payment').value}\nNotes: ${document.getElementById('b-notes').value}`;
                         } else if (formId === 'complaint-form') {
                             messageBody = `Name: ${document.getElementById('comp-name').value}\nPhone: ${document.getElementById('comp-phone').value}\nDate of Journey: ${document.getElementById('comp-date').value}\nIssue: ${document.getElementById('comp-desc').value}`;
                         }
