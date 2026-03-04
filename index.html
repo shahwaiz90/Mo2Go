@@ -26,6 +26,16 @@
     <meta name="twitter:description" content="Trusted, friendly local driver in Warwickshire, UK.">
     <meta name="twitter:image" content="https://mo2go.co.uk/assets/hero_bg.png">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NY3VMS2FH1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NY3VMS2FH1');
+    </script>
+
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -1404,6 +1414,13 @@
                             });
 
                             if (response.status === 200) {
+                                // Track form submission in GA
+                                if (typeof gtag === 'function') {
+                                    gtag('event', 'form_submission', {
+                                        'event_category': 'Form',
+                                        'event_label': subjectTitle
+                                    });
+                                }
                                 form.style.display = 'none';
                                 successMsg.style.display = 'block';
                             } else {
@@ -1441,6 +1458,25 @@
 
             document.querySelectorAll('.fade-in').forEach(el => {
                 observer.observe(el);
+            });
+
+            // Google Analytics Event Tracking for Contacts
+            document.querySelectorAll('a[href^="tel:"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (typeof gtag === 'function') gtag('event', 'click_phone', { 'event_category': 'Contact', 'event_label': link.innerText.trim() || 'Phone Link' });
+                });
+            });
+
+            document.querySelectorAll('a[href^="mailto:"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (typeof gtag === 'function') gtag('event', 'click_email', { 'event_category': 'Contact', 'event_label': 'Email Link' });
+                });
+            });
+
+            document.querySelectorAll('a[href^="https://wa.me/"]').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (typeof gtag === 'function') gtag('event', 'click_whatsapp', { 'event_category': 'Contact', 'event_label': 'WhatsApp Link' });
+                });
             });
         });
     </script>
