@@ -1095,8 +1095,8 @@
         style="background-color: #f7fafc; padding: 60px 24px; border-top: 1px solid #edf2f7; border-bottom: 1px solid #edf2f7;">
         <div class="booking-header">
             <h2>Calculate Estimated Fare</h2>
-            <p style="font-size: 20px; color: #4a5568;">Plan your journey instantly. £5 pick-up rate + £1.50 flat rate
-                per mile.</p>
+            <p style="font-size: 20px; color: #4a5568;">Plan your journey instantly. £5 pick-up rate flat.<br>Standard:
+                £1.50/mile | Elderly (57+): £1.00/mile</p>
         </div>
 
         <div class="card" style="max-width: 600px; margin: 0 auto;">
@@ -1108,6 +1108,14 @@
                 <label for="f-dropoff">End Destination (Postcode or Town)</label>
                 <input type="text" id="f-dropoff" class="form-control"
                     placeholder="e.g., B26 3QJ or Birmingham Airport">
+            </div>
+
+            <div class="form-group" style="margin-bottom: 24px; text-align: left;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700;">
+                    <input type="checkbox" id="f-elderly"
+                        style="width: 24px; height: 24px; accent-color: var(--primary);">
+                    Elderly Passenger / Shared Ride (Discounted Rate)
+                </label>
             </div>
 
             <button id="calc-fare-btn" class="btn btn-primary" style="width: 100%; margin-bottom: 24px;">Calculate
@@ -1586,7 +1594,10 @@
                         if (routeData && routeData.routes && routeData.routes.length > 0) {
                             const distanceMeters = routeData.routes[0].distance;
                             const distanceMiles = distanceMeters * 0.000621371;
-                            const fare = 5.00 + (distanceMiles * 1.50);
+
+                            const isElderly = document.getElementById('f-elderly').checked;
+                            const ratePerMile = isElderly ? 1.00 : 1.50;
+                            const fare = 5.00 + (distanceMiles * ratePerMile);
 
                             document.getElementById('fare-distance').innerText = distanceMiles.toFixed(1);
                             document.getElementById('fare-amount').innerText = `£${fare.toFixed(2)}`;
