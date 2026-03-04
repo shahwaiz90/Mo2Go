@@ -1090,23 +1090,65 @@
                 });
             });
 
-            // Form Submissions (No reload)
-            const handleForm = (formId, successId) => {
+            // Form Submissions via Web3Forms (No reload)
+            const handleForm = (formId, successId, subjectTitle) => {
                 const form = document.getElementById(formId);
                 const successMsg = document.getElementById(successId);
 
                 if (form && successMsg) {
-                    form.addEventListener('submit', (e) => {
+                    form.addEventListener('submit', async (e) => {
                         e.preventDefault();
-                        form.style.display = 'none';
-                        successMsg.style.display = 'block';
+
+                        const submitBtn = form.querySelector('button[type="submit"]');
+                        const originalText = submitBtn.innerText;
+                        submitBtn.innerText = 'Sending...';
+                        submitBtn.disabled = true;
+
+                        // Format the message based on which form was submitted
+                        let messageBody = "";
+                        if (formId === 'booking-form') {
+                            messageBody = `Name: ${document.getElementById('b-name').value}\nPhone: ${document.getElementById('b-phone').value}\nPick-Up: ${document.getElementById('b-pickup').value}\nDestination: ${document.getElementById('b-dest').value}\nDate: ${document.getElementById('b-date').value}\nTime: ${document.getElementById('b-time').value}\nRequirements: ${document.getElementById('b-req').value}\nNotes: ${document.getElementById('b-notes').value}`;
+                        } else if (formId === 'contact-form') {
+                            messageBody = `Name: ${document.getElementById('c-name').value}\nPhone: ${document.getElementById('c-phone').value}\nMessage: ${document.getElementById('c-msg').value}`;
+                        } else if (formId === 'complaint-form') {
+                            messageBody = `Name: ${document.getElementById('comp-name').value}\nPhone: ${document.getElementById('comp-phone').value}\nDate of Journey: ${document.getElementById('comp-date').value}\nIssue: ${document.getElementById('comp-desc').value}`;
+                        }
+
+                        try {
+                            const response = await fetch('https://api.web3forms.com/submit', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Accept': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    access_key: "58ca2d47-9f0a-4fc4-a0bb-afe2fc394a8c",
+                                    subject: subjectTitle,
+                                    from_name: "Mo 2 Go Website",
+                                    message: messageBody
+                                })
+                            });
+
+                            if (response.status === 200) {
+                                form.style.display = 'none';
+                                successMsg.style.display = 'block';
+                            } else {
+                                alert("Oops! Something went wrong. Please give us a call instead.");
+                                submitBtn.innerText = originalText;
+                                submitBtn.disabled = false;
+                            }
+                        } catch (error) {
+                            alert("Oops! Something went wrong. Please give us a call instead.");
+                            submitBtn.innerText = originalText;
+                            submitBtn.disabled = false;
+                        }
                     });
                 }
             };
 
-            handleForm('booking-form', 'booking-success');
-            handleForm('contact-form', 'contact-success');
-            handleForm('complaint-form', 'complaint-success');
+            handleForm('booking-form', 'booking-success', 'New Taxi Booking Request');
+            handleForm('contact-form', 'contact-success', 'New Contact Form Message');
+            handleForm('complaint-form', 'complaint-success', 'URGENT: New Complaint Registered');
 
             // Scroll Animation Observer
             const observerOptions = {
