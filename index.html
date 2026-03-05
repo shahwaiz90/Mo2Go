@@ -1100,7 +1100,7 @@
         <div class="booking-header">
             <h2>Calculate Estimated Fare</h2>
             <p style="font-size: 20px; color: #4a5568;">Plan your journey instantly. £5 pick-up rate flat.<br>Standard:
-                £1.50/mile | Elderly (57+): £1.00/mile</p>
+                £1.75/mile | Elderly (57+): £1.25/mile</p>
         </div>
 
         <div class="card" style="max-width: 600px; margin: 0 auto;">
@@ -1613,7 +1613,7 @@
                             const distanceMiles = distanceMeters * 0.000621371;
 
                             const passengerType = document.getElementById('f-passenger-type').value;
-                            const ratePerMile = (passengerType === 'elderly') ? 1.00 : 1.50;
+                            const ratePerMile = (passengerType === 'elderly') ? 1.25 : 1.75;
                             const fare = 5.00 + (distanceMiles * ratePerMile);
 
                             document.getElementById('fare-distance').innerText = distanceMiles.toFixed(1);
