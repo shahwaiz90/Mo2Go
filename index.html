@@ -63,6 +63,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
+    <!-- Leaflet JS for OpenStreetMap display -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+
     <style>
         :root {
             --primary: #1a4d3a;
@@ -1126,9 +1130,8 @@
                         id="fare-amount">£0.00</span></h3>
                 <p style="color: #2d3748; font-weight: 600;">Distance: <span id="fare-distance">0</span> miles</p>
                 <div
-                    style="margin-top: 20px; border-radius: 8px; overflow: hidden; height: 300px; border: 2px solid #e2e8f0;">
-                    <iframe id="fare-map-iframe" width="100%" height="100%" frameborder="0" scrolling="no"
-                        marginheight="0" marginwidth="0" src=""></iframe>
+                    style="margin-top: 20px; border-radius: 8px; overflow: hidden; height: 300px; border: 2px solid #e2e8f0; position: relative;">
+                    <div id="fare-map" style="width: 100%; height: 100%; z-index: 1;"></div>
                 </div>
                 <p style="font-size: 14px; color: #718096; margin-top: 12px;">*This is a rough estimate based on the
                     quickest route. Extra wait times or precise dropoff coordinates may slightly affect final pricing.
@@ -1566,6 +1569,10 @@
             const errorBox = document.getElementById('fare-error');
             const loadingBox = document.getElementById('fare-loading');
 
+            let fareMapInstance = null;
+            let fareRouteLayer = null;
+            let fareMarkers = [];
+
             if (calcBtn) {
                 calcBtn.addEventListener('click', async () => {
                     const pickup = document.getElementById('f-pickup').value.trim();
@@ -1596,7 +1603,7 @@
                             throw new Error("Could not find locations");
                         }
 
-                        const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${startCoords.lon},${startCoords.lat};${endCoords.lon},${endCoords.lat}?overview=false`;
+                        const osrmUrl = `https://router.project-osrm.org/route/v1/driving/${startCoords.lon},${startCoords.lat};${endCoords.lon},${endCoords.lat}?overview=full&geometries=geojson`;
                         const routeRes = await fetch(osrmUrl);
                         const routeData = await routeRes.json();
 
@@ -1611,13 +1618,36 @@
                             document.getElementById('fare-distance').innerText = distanceMiles.toFixed(1);
                             document.getElementById('fare-amount').innerText = `£${fare.toFixed(2)}`;
 
-                            const mapIframe = document.getElementById('fare-map-iframe');
-                            if (mapIframe) {
-                                mapIframe.src = `https://maps.google.com/maps?saddr=${encodeURIComponent(pickup)}&daddr=${encodeURIComponent(dropoff)}&output=embed`;
-                            }
-
                             loadingBox.style.display = 'none';
                             resultBox.style.display = 'block';
+
+                            // Map rendering logic
+                            if (!fareMapInstance) {
+                                fareMapInstance = L.map('fare-map');
+                                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                    maxZoom: 19,
+                                    attribution: '© OpenStreetMap contributors'
+                                }).addTo(fareMapInstance);
+                            }
+
+                            fareMapInstance.invalidateSize();
+
+                            if (fareRouteLayer) fareMapInstance.removeLayer(fareRouteLayer);
+                            fareMarkers.forEach(m => fareMapInstance.removeLayer(m));
+                            fareMarkers = [];
+
+                            // Render geometric route
+                            const geojsonRoute = routeData.routes[0].geometry;
+                            fareRouteLayer = L.geoJSON(geojsonRoute, {
+                                style: { color: '#3b82f6', weight: 5, opacity: 0.8 }
+                            }).addTo(fareMapInstance);
+
+                            // Set start & end markers
+                            fareMarkers.push(L.marker([startCoords.lat, startCoords.lon]).addTo(fareMapInstance));
+                            fareMarkers.push(L.marker([endCoords.lat, endCoords.lon]).addTo(fareMapInstance));
+
+                            // Lock view bounding box
+                            fareMapInstance.fitBounds(fareRouteLayer.getBounds(), { padding: [30, 30] });
 
                             if (typeof gtag === 'function') gtag('event', 'fare_estimate', { 'event_category': 'Engagement', 'event_label': `${pickup} to ${dropoff}` });
                         } else {
