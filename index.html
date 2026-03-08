@@ -1430,11 +1430,49 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // Set min date for date picker to today
+            // Set min date and default values for date/time pickers
             const dateInput = document.getElementById('b-date');
-            if (dateInput) {
+            const timeInput = document.getElementById('b-time');
+            
+            if (dateInput && timeInput) {
+                const now = new Date();
+                const todayStr = now.toISOString().split('T')[0];
+                const currentTimeStr = now.toTimeString().slice(0, 5); // HH:MM format
+                
+                // Set default values to 'now'
+                dateInput.value = todayStr;
+                timeInput.value = currentTimeStr;
+                
+                // Prevent selecting past dates
+                dateInput.setAttribute('min', todayStr);
+                
+                // Function to handle time validation
+                const validateTime = () => {
+                    const selectedDate = dateInput.value;
+                    const selectedTime = timeInput.value;
+                    const checkNow = new Date();
+                    const checkTodayStr = checkNow.toISOString().split('T')[0];
+                    
+                    if (selectedDate === checkTodayStr) {
+                        const checkTimeStr = checkNow.toTimeString().slice(0, 5);
+                        if (selectedTime < checkTimeStr) {
+                            alert("Please select a current or future time.");
+                            timeInput.value = checkTimeStr;
+                        }
+                    }
+                };
+
+                // Add listeners to prevent back-dating time on the same day
+                dateInput.addEventListener('change', validateTime);
+                timeInput.addEventListener('change', validateTime);
+            }
+
+            // Also handle complaint date (prevent future dates)
+            const compDateInput = document.getElementById('comp-date');
+            if (compDateInput) {
                 const today = new Date().toISOString().split('T')[0];
-                dateInput.setAttribute('min', today);
+                compDateInput.setAttribute('max', today);
+                compDateInput.value = today;
             }
 
             // Mobile Menu Toggle
