@@ -914,9 +914,7 @@
             font-size: 16px;
         }
 
-        .h-captcha {
-            margin-bottom: 24px;
-        }
+
 
         /* WhatsApp Float */
         @keyframes whatsapp-ring {
@@ -1155,11 +1153,14 @@
             <p style="font-size: 20px; color: #4a5568;">Fill in the form below and we'll call you back to confirm — or
                 simply give us a ring!</p>
             <a href="tel:07365450917" class="booking-phone">07365 450917</a><br>
-            <div class="discount-banner">
-                <span>🌟</span> We offer great discount rates for elderly passengers (Age 57+).<br>
-                <small style="font-size: 14px; opacity: 0.9; margin-left: 28px; display: block;"><strong>Polite
+            <div class="discount-banner" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span>🌟</span> We offer great discount rates for elderly passengers (Age 57+).
+                </div>
+                <small style="font-size: 14px; opacity: 0.9; margin-left: 40px; display: block;"><strong>Polite
                         notice:</strong> To get this discount, please provide a valid ID (such as a Driving License,
                     Passport, or Medical Card) to the driver or via WhatsApp to prove your age.</small>
+                <small style="font-size: 14px; opacity: 0.9; margin-left: 40px; display: block; margin-top: 8px;"><strong>Zero Tolerance:</strong> Please note that any bad language or rudeness won't be tolerated.</small>
             </div>
         </div>
 
@@ -1219,8 +1220,9 @@
                     <div class="form-group">
                         <label for="b-payment">Payment Preference</label>
                         <select id="b-payment" class="form-control">
-                            <option value="card">Card Payment</option>
+                            <option value="card">Card Payment (Pay in Car)</option>
                             <option value="cash">Cash Payment</option>
+                            <option value="prepay">Pre-book & Confirm (£5.00 Deposit Online)</option>
                         </select>
                     </div>
 
@@ -1232,7 +1234,6 @@
 
                     <!-- Web3Forms Honeypot & Captcha -->
                     <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                    <div class="form-group full-width h-captcha" data-captcha="true"></div>
 
                     <div class="form-group full-width" style="margin-bottom: 0;">
                         <button type="submit" class="btn btn-primary" style="width: 100%;">Request My Taxi</button>
@@ -1243,8 +1244,20 @@
             <div id="booking-success" class="form-success">
                 <div class="form-success-icon">✓</div>
                 <h3>Request Sent Successfully!</h3>
-                <p style="font-size: 20px; color: #2d3748;">Thank you. We have received your details and will call you
+                <p style="font-size: 20px; color: #2d3748;" id="success-msg-text">Thank you. We have received your details and will call you
                     back shortly to confirm your booking.</p>
+                <div id="prepay-actions" style="display: none; margin-top: 24px;">
+                    <p style="font-weight: 700; color: var(--primary); margin-bottom: 16px;">To confirm your booking, please pay the £5.00 pre-booking deposit below:</p>
+                    <a href="https://monzo.com/pay/r/mo-2-go-private-hire-serv_zuYTMyDLqerHiE" class="btn btn-primary" style="width: 100%; text-decoration: none;">Pay £5.00 via Monzo</a>
+                    <p style="font-size: 14px; margin-top: 12px; opacity: 0.8;">You will be redirected to Monzo's secure payment page.</p>
+                </div>
+            </div>
+
+            <div id="payment-status-message" class="form-success" style="display: none; border-color: var(--accent); background: #fffcf0;">
+                <div id="payment-status-icon" class="form-success-icon" style="color: var(--accent);">💳</div>
+                <h3 id="payment-status-title">Payment Status</h3>
+                <p id="payment-status-text" style="font-size: 20px; color: #2d3748;"></p>
+                <button onclick="window.location.hash='#book'; location.reload();" class="btn btn-secondary" style="margin-top: 24px; color: var(--primary); border-color: var(--primary);">Back to Booking</button>
             </div>
         </div>
 
@@ -1320,7 +1333,6 @@
 
                         <!-- Web3Forms Honeypot & Captcha -->
                         <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                        <div class="h-captcha" data-captcha="true"></div>
 
                         <button type="submit" class="btn btn-danger" style="width: 100%;">Submit</button>
                     </form>
@@ -1455,12 +1467,7 @@
                         const submitBtn = form.querySelector('button[type="submit"]');
                         const originalText = submitBtn.innerText;
 
-                        // Check Captcha
-                        const hCaptcha = form.querySelector('[name="h-captcha-response"]');
-                        if (hCaptcha && !hCaptcha.value) {
-                            alert("Please complete the Captcha verification before submitting.");
-                            return;
-                        }
+
 
                         submitBtn.innerText = 'Sending...';
                         submitBtn.disabled = true;
@@ -1493,8 +1500,7 @@
                                     access_key: accessKey,
                                     subject: subjectTitle,
                                     from_name: "Mo2Go Website",
-                                    message: messageBody,
-                                    "h-captcha-response": hCaptcha ? hCaptcha.value : ""
+                                    message: messageBody
                                 })
                             });
 
@@ -1506,8 +1512,20 @@
                                         'event_label': subjectTitle
                                     });
                                 }
-                                form.style.display = 'none';
-                                successMsg.style.display = 'block';
+                                
+                                if (formId === 'booking-form') {
+                                    const paymentType = document.getElementById('b-payment').value;
+                                    form.style.display = 'none';
+                                    successMsg.style.display = 'block';
+                                    
+                                    if (paymentType === 'prepay') {
+                                        document.getElementById('success-msg-text').innerText = "Details received! Your booking is almost complete.";
+                                        document.getElementById('prepay-actions').style.display = 'block';
+                                    }
+                                } else {
+                                    form.style.display = 'none';
+                                    successMsg.style.display = 'block';
+                                }
                             } else {
                                 alert("Oops! Something went wrong. Please give us a call instead.");
                                 submitBtn.innerText = originalText;
@@ -1663,6 +1681,40 @@
                     }
                 });
             }
+
+            // Handle Payment Success/Error from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('payment')) {
+                const status = urlParams.get('payment');
+                const card = document.getElementById('booking-card');
+                const form = document.getElementById('booking-form');
+                const statusBox = document.getElementById('payment-status-message');
+                const statusTitle = document.getElementById('payment-status-title');
+                const statusText = document.getElementById('payment-status-text');
+                const statusIcon = document.getElementById('payment-status-icon');
+
+                if (card && form && statusBox) {
+                    form.style.display = 'none';
+                    statusBox.style.display = 'block';
+                    window.location.hash = '#book';
+
+                    if (status === 'success') {
+                        statusTitle.innerText = "Payment Successful!";
+                        statusText.innerText = "Thank you for your payment. Your booking is now fully confirmed. We'll see you at the scheduled time!";
+                        statusIcon.innerText = "✓";
+                        statusIcon.style.color = "var(--success)";
+                        statusBox.style.borderColor = "var(--success)";
+                        statusBox.style.background = "#f0fff4";
+                    } else if (status === 'error') {
+                        statusTitle.innerText = "Payment Not Completed";
+                        statusText.innerText = "It looks like the payment wasn't finished. Your details are saved, but please give us a call to confirm your booking or try paying again.";
+                        statusIcon.innerText = "⚠️";
+                        statusIcon.style.color = "var(--error)";
+                        statusBox.style.borderColor = "var(--error)";
+                        statusBox.style.background = "#fff5f5";
+                    }
+                }
+            }
         });
     </script>
 
@@ -1675,8 +1727,7 @@
         </svg>
         <span class="whatsapp-text">Contact Us Now</span>
     </a>
-    <!-- Web3Forms Captcha Script -->
-    <script src="https://web3forms.com/client/script.js" async defer></script>
+
 </body>
 
 </html>
